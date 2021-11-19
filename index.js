@@ -21,7 +21,7 @@ const handleSubmit = e => {
   <form onSubmit={handleSubmit}>
    <h4>Number of items on the list: {count}</h4>
    <input type="text" value={value} onChange = {(e=>setValue(e.target.value))} />
-   <button type="submit">Add</button>
+   <button type="submit" disabled={!value.length}>Add</button>
   </form>
   ); 
 }
@@ -30,8 +30,12 @@ const handleSubmit = e => {
   const [list, setList] = useState([]);
 
   
-  const addValue = text => setList([...list, { text }]);
-  
+  const addValue = text => {
+    if(list.indexOf("mini") !== -1){
+      alert("This item already exists");
+    }else{setList([...list, { text }])} 
+  };
+ 
   return(
   <>
     <AddForm addValue = {addValue} />
